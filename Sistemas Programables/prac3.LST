@@ -1,0 +1,227 @@
+MPASM  5.22                         PRAC3.ASM   10-9-2017  11:57:25         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************************************
+                      00002 ;   DESCRIPCIÓN DEL PROGRAMA:                         
+                      00003 ;**********************************************************************************************
+                      00004 ;                                                                     
+                      00005 ;    NOMBRE DEL ARCHIVO:          prac2.asm                           
+                      00006 ;    FECHA:                                                           
+                      00007 ;                                                                     
+                      00008 ;                                                                     
+                      00009 ;    AUTOR:                                                           
+                      00010 ;    CATEDRATICO: ING. CARLOS ROBERTO GONZALEZ ESCARPETA              
+                      00011 ;    ASIGNATURA:  SISTEMAS PROGRAMABLES                                   
+                      00012 ;                                                                      
+                      00013 ;                                                                     
+                      00014 ;************************************************************************************************
+                      00015 ;                                                                    
+                      00016 ;              INSTITUTO TECNOLOGICO DE VERACRUZ                      
+                      00017 ;                                                                     
+                      00018 ;***********************************************************************************************
+                      00019 ;                                                                     
+                      00020 ;OBJETIVO:                                      
+                      00021 ;************************************************************************************************
+                      00022 
+                      00023 
+                      00024         list      p=16F84A            ; define procesador
+                      00025         #include <p16F84A.inc>       ; define variables del procesador
+                      00001         LIST
+                      00002 ; P16F84A.INC  Standard Header File, Version 2.00    Microchip Technology, Inc.
+                      00134         LIST
+                      00026         
+2007   3FF1           00027         __CONFIG   _CP_OFF & _WDT_OFF & _PWRTE_ON & _XT_OSC
+                      00028 
+                      00029 ;***************************DEFINICION DE VARIABLES********************
+                      00030 
+  00000003            00031 STATUS  EQU     0X03    ;SE ASIGNÓ LA ETIQUETA STATUS AL REGISTRO 0X03 DE LA MEMORIA DE DATOS
+  00000005            00032 PORTA   EQU     0X05    ;SE ASIGNO LA ETIQUETA PORTA AL REGISTRO 0X05 DE LA MEMORIA DE DATOS
+  00000006            00033 PORTB   EQU     0X06    ;SE ASIGNO LA ETIQUETA PORTB AL REGISTRO 0X06 DE LA MEMORIA DE DATOS
+  00000085            00034 TRISA   EQU     0X85    ;SE ASIGNO LA ETIQUETA TRISA AL REGISTRO 0X85 DE LA MEMORIA DE DATOS
+  00000086            00035 TRISB   EQU     0X86    ;SE ASIGNO LA ETIQUETA TRISB AL REGISTRO 0X86 DE LA MEMORIA DE DATOS
+  0000000C            00036 CounterA EQU 0x0C
+  0000000D            00037 CounterB EQU 0x0D
+  0000000E            00038 CounterC EQU 0X0E
+                      00039 ;**********************************************************************
+                      00040 
+                      00041 ;***************************CODIGO*************************************
+                      00042 
+0000                  00043         ORG     0X00    ;SE INDICA QUE EL PROGRAMA INICIA EN LA DIRECCIÓN 0X00
+                      00044 
+0000                  00045 INICIO  
+                      00046         
+0000   1683           00047         BSF     STATUS,5
+                      00048 
+0001   3001           00049         MOVLW   0X01
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.22                         PRAC3.ASM   10-9-2017  11:57:25         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0002   0085           00050         MOVWF   TRISA
+0003   3000           00051         MOVLW   0X00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   0086           00052         MOVWF   TRISB
+                      00053         
+0005   1283           00054         BCF     STATUS,5
+                      00055 
+0006                  00056 MAIN 
+0006   1805           00057         BTFSC  PORTA,0  ;SALTA SI EL BIT "b" 0 DE [PORTA] ES CERO
+0007   2809           00058         GOTO   S1
+0008   281C           00059         GOTO   S2
+                      00060         
+0009                  00061 S1      
+0009   1486           00062         BSF PORTB,1
+                      00063         ;PIC Time Delay = 0,00120020 s with Osc = 40000000 Hz
+000A   3010           00064                 movlw   D'16'
+000B   008D           00065                 movwf   CounterB
+000C   3095           00066                 movlw   D'149'
+000D   008C           00067                 movwf   CounterA
+000E   0B8C           00068 loop            decfsz  CounterA,1
+000F   280E           00069                 goto    loop
+0010   0B8D           00070                 decfsz  CounterB,1
+0011   280E           00071                 goto    loop
+0012   1086           00072                 BCF PORTB,1 
+                      00073 ;PIC Time Delay = 0,01880020 s with Osc = 40000000 Hz
+0013   30F5           00074                 movlw   D'245'
+0014   008D           00075                 movwf   CounterB
+0015   3027           00076                 movlw   D'39'
+0016   008C           00077                 movwf   CounterA
+0017   0B8C           00078 loop1           decfsz  CounterA,1
+0018   2817           00079                 goto    loop1
+0019   0B8D           00080                 decfsz  CounterB,1
+001A   2817           00081                 goto    loop1           
+001B   2806           00082         GOTO   MAIN
+001C                  00083 S2        
+001C   1486           00084         BSF PORTB,1 
+                      00085         ;PIC Time Delay = 0,00210020 s with Osc = 40000000 Hz
+001D   301C           00086                 movlw   D'28'
+001E   008D           00087                 movwf   CounterB
+001F   3045           00088                 movlw   D'69'
+0020   008C           00089                 movwf   CounterA
+0021   0B8C           00090 loop2           decfsz  CounterA,1
+0022   2821           00091                 goto    loop2
+0023   0B8D           00092                 decfsz  CounterB,1
+0024   2821           00093                 goto    loop2
+0025   1086           00094         BCF PORTB,1 
+                      00095         ;PIC Time Delay = 0,01790020 s with Osc = 40000000 Hz
+0026   30E9           00096                 movlw   D'233'
+0027   008D           00097                 movwf   CounterB
+0028   3077           00098                 movlw   D'119'
+0029   008C           00099                 movwf   CounterA
+002A   0B8C           00100 loop3           decfsz  CounterA,1
+002B   282A           00101                 goto    loop3
+MPASM  5.22                         PRAC3.ASM   10-9-2017  11:57:25         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002C   0B8D           00102                 decfsz  CounterB,1
+002D   282A           00103                 goto    loop3
+002E   2806           00104         GOTO   MAIN
+                      00105         END
+MPASM  5.22                         PRAC3.ASM   10-9-2017  11:57:25         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+CounterA                          0000000C
+CounterB                          0000000D
+CounterC                          0000000E
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INICIO                            00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+MAIN                              00000006
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+S1                                00000009
+S2                                0000001C
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TRISA                             00000085
+TRISB                             00000086
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+MPASM  5.22                         PRAC3.ASM   10-9-2017  11:57:25         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+Z                                 00000002
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+loop                              0000000E
+loop1                             00000017
+loop2                             00000021
+loop3                             0000002A
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    47
+Program Memory Words Free:   977
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

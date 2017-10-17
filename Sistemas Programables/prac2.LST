@@ -1,0 +1,176 @@
+MPASM  5.22                         PRAC2.ASM   10-2-2017  11:21:10         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************************************
+                      00002 ;   DESCRIPCIÓN DEL PROGRAMA:                         
+                      00003 ;**********************************************************************************************
+                      00004 ;                                                                     
+                      00005 ;    NOMBRE DEL ARCHIVO:          prac2.asm                           
+                      00006 ;    FECHA:                                                           
+                      00007 ;                                                                     
+                      00008 ;                                                                     
+                      00009 ;    AUTOR:                                                           
+                      00010 ;    CATEDRATICO: ING. CARLOS ROBERTO GONZALEZ ESCARPETA              
+                      00011 ;    ASIGNATURA:  SISTEMAS PROGRAMABLES                                   
+                      00012 ;                                                                      
+                      00013 ;                                                                     
+                      00014 ;************************************************************************************************
+                      00015 ;                                                                    
+                      00016 ;              INSTITUTO TECNOLOGICO DE VERACRUZ                      
+                      00017 ;                                                                     
+                      00018 ;***********************************************************************************************
+                      00019 ;                                                                     
+                      00020 ;OBJETIVO:                                      
+                      00021 ;************************************************************************************************
+                      00022 
+                      00023 
+                      00024         list      p=16F84A            ; define procesador
+                      00025         #include <p16F84A.inc>       ; define variables del procesador
+                      00001         LIST
+                      00002 ; P16F84A.INC  Standard Header File, Version 2.00    Microchip Technology, Inc.
+                      00134         LIST
+                      00026         
+2007   3FF1           00027         __CONFIG   _CP_OFF & _WDT_OFF & _PWRTE_ON & _XT_OSC
+                      00028 
+                      00029 ;***************************DEFINICION DE VARIABLES********************
+                      00030 
+  00000003            00031 STATUS  EQU     0X03    ;SE ASIGNÓ LA ETIQUETA STATUS AL REGISTRO 0X03 DE LA MEMORIA DE DATOS
+  00000005            00032 PORTA   EQU     0X05    ;SE ASIGNO LA ETIQUETA PORTA AL REGISTRO 0X05 DE LA MEMORIA DE DATOS
+  00000006            00033 PORTB   EQU     0X06    ;SE ASIGNO LA ETIQUETA PORTB AL REGISTRO 0X06 DE LA MEMORIA DE DATOS
+  00000085            00034 TRISA   EQU     0X85    ;SE ASIGNO LA ETIQUETA TRISA AL REGISTRO 0X85 DE LA MEMORIA DE DATOS
+  00000086            00035 TRISB   EQU     0X86    ;SE ASIGNO LA ETIQUETA TRISB AL REGISTRO 0X86 DE LA MEMORIA DE DATOS
+                      00036 
+                      00037 ;**********************************************************************
+                      00038 
+                      00039 ;***************************CODIGO*************************************
+                      00040 
+0000                  00041         ORG     0X00    ;SE INDICA QUE EL PROGRAMA INICIA EN LA DIRECCIÓN 0X00
+                      00042 
+0000                  00043 INICIO  
+                      00044         
+0000   1683           00045         BSF     STATUS,5
+                      00046 
+0001   3001           00047         MOVLW   0X01
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0002   0085           00048         MOVWF   TRISA
+0003   3000           00049         MOVLW   0X00
+MPASM  5.22                         PRAC2.ASM   10-2-2017  11:21:10         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   0086           00050         MOVWF   TRISB
+                      00051         
+0005   1283           00052         BCF     STATUS,5
+                      00053 
+0006                  00054 MAIN 
+0006   1805           00055         BTFSC  PORTA,0  ;SALTA SI EL BIT "b" 0 DE [PORTA] ES CERO
+0007   2809           00056         GOTO   S1
+0008   280C           00057         GOTO   S2
+                      00058         
+0009                  00059 S1      
+0009   30AA           00060         MOVLW  0xAA
+000A   0086           00061         MOVWF  PORTB
+000B   2806           00062         GOTO   MAIN
+000C                  00063 S2           
+000C   3055           00064         MOVLW  0x55
+000D   0086           00065         MOVWF  PORTB
+000E   2806           00066         GOTO   MAIN
+                      00067         END
+MPASM  5.22                         PRAC2.ASM   10-2-2017  11:21:10         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INICIO                            00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+MAIN                              00000006
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+S1                                00000009
+S2                                0000000C
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TRISA                             00000085
+TRISB                             00000086
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+MPASM  5.22                         PRAC2.ASM   10-2-2017  11:21:10         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXX- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    15
+Program Memory Words Free:  1009
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+
