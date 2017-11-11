@@ -1,0 +1,7 @@
+Warning[215] C:\USERS\PC\DESKTOP\A-D.ASM 1 : Processor superseded by command line.  Verify processor symbol.
+Message[301] C:\USERS\PC\DESKTOP\P16F876A.INC 36 : MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
+Message[302] C:\USERS\PC\DESKTOP\A-D.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\PC\DESKTOP\A-D.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\PC\DESKTOP\A-D.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\PC\DESKTOP\A-D.ASM 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\PC\DESKTOP\A-D.ASM 78 : Register in operand not in bank 0.  Ensure that bank bits are correct.
