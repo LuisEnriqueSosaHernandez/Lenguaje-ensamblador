@@ -11,7 +11,8 @@
 //    CATEDRATICO: ING. CARLOS ROBERTO GONZALEZ ESCARPETA              
 //    ASIGNATURA: SISTEMAS PROGRAMABLES                                   
 //                                                                     
-//************************************************************************************************       //              INSTITUTO TECNOLOGICO DE VERACRUZ                      
+//************************************************************************************************      
+//              INSTITUTO TECNOLOGICO DE VERACRUZ                      
 //***********************************************************************************************
 //OBJETIVO:Analizar el módulo ADC de un microcontrolador para convertir al menos una 
 //señal analógica a digital
